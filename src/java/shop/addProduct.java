@@ -2,11 +2,9 @@ package shop;
 
 import business.Product;
 import data.ProductIO;
-import static data.ProductIO.productList;
 import java.io.IOException;
 import javax.servlet.http.*;
 import javax.servlet.*;
-import java.util.*;
 
 public class addProduct extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -19,7 +17,7 @@ public class addProduct extends HttpServlet{
         String file = sc.getRealPath(sc.getInitParameter("relativePathToFile"));
         ProductIO.addProduct(product, file);
         
-        String url = "/viewProducts.jsp";
+        String url = "/viewProductPage.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }

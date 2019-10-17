@@ -7,8 +7,8 @@
 <p>
     <small>
         &copy; Copyright <%= currentYear%>
-        Mike Murach &amp; Associates, Inc.
-        All rights reserved
+        Le Quoc Huy &amp; Nguyen Manh Duc.
+        All rights reserved.
     </small>
 </p>
 </body>

@@ -1,12 +1,10 @@
 package shop;
 
-import business.Product;
 import data.ProductIO;
 import static data.ProductIO.productList;
 import java.io.IOException;
 import javax.servlet.http.*;
 import javax.servlet.*;
-import java.util.*;
 
 public class viewProduct extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -15,9 +13,12 @@ public class viewProduct extends HttpServlet{
         ProductIO.viewProduct(file);
         
         request.setAttribute("productList", productList);
-        String url = "/viewProducts.jsp";
-        RequestDispatcher dispatcher
-                = getServletContext().getRequestDispatcher(url);
+        String url = "/viewProductPage.jsp";
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
+    }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        doGet(request, response);
     }
 }

@@ -1,71 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee      http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <!--the definitions for the servlet-->
     <servlet>
         <servlet-name>ViewProduct</servlet-name>
         <servlet-class>shop.viewProduct</servlet-class>
     </servlet>
-    
     <!--the mapping for the servlets-->
     <servlet-mapping>
         <servlet-name>ViewProduct</servlet-name>
         <url-pattern>/viewProduct</url-pattern>
     </servlet-mapping>
-    
     <!--the definitions for the servlet-->
     <servlet>
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>shop.addProduct</servlet-class>
     </servlet>
-    
     <!--the mapping for the servlets-->
     <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>
         <url-pattern>/addProduct</url-pattern>
     </servlet-mapping>
-    
-        <!--the definitions for the servlet-->
+    <!--the definitions for the servlet-->
     <servlet>
         <servlet-name>EditProduct</servlet-name>
         <servlet-class>shop.editProduct</servlet-class>
     </servlet>
-    
     <!--the mapping for the servlets-->
     <servlet-mapping>
         <servlet-name>EditProduct</servlet-name>
         <url-pattern>/editProduct</url-pattern>
     </servlet-mapping>
-    
-        <!--the definitions for the servlet-->
+    <!--the definitions for the servlet-->
     <servlet>
         <servlet-name>DeleteProduct</servlet-name>
         <servlet-class>shop.deleteProduct</servlet-class>
     </servlet>
-    
     <!--the mapping for the servlets-->
     <servlet-mapping>
         <servlet-name>DeleteProduct</servlet-name>
         <url-pattern>/deleteProduct</url-pattern>
     </servlet-mapping>
-
     <context-param>
         <param-name>relativePathToFile</param-name>
         <param-value>/WEB-INF/products.txt</param-value>
     </context-param>
-    
     <error-page>
         <error-code>404</error-code>
         <location>/error_404.jsp</location>
     </error-page>
-
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>welcomePage.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
