@@ -18,8 +18,12 @@ public class editProduct extends HttpServlet {
         String codeMessage = "";
         String descriptionMessage = "";
         String priceMessage = "";
+        
         if (code.length() == 0) {
             codeMessage = "Please enter product's code.";
+            code = " ";
+        } else if (ProductIO.isCodeExist(code) && code.equals(oldCode) == false) {
+            codeMessage = "Code has existed. Please enter another.";
             code = " ";
         } else {
             request.setAttribute("code", code);

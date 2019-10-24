@@ -65,4 +65,13 @@ public class ProductIO {
         }
         printWriter.close();
     }
+
+    public static boolean isCodeExist(String code) {
+        for (Product product : productList) {
+            if (product.getCode().equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
