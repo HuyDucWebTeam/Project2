@@ -12,7 +12,9 @@ public class viewProduct extends HttpServlet{
         String file = sc.getRealPath(sc.getInitParameter("relativePathToFile"));
         ProductIO.viewProduct(file);
         
-        request.setAttribute("productList", productList);
+        HttpSession session = request.getSession();
+        session.setAttribute("productList", productList);
+        
         String url = "/viewProductPage.jsp";
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);

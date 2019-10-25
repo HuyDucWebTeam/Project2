@@ -12,21 +12,21 @@ public class addProduct extends HttpServlet {
         String code = request.getParameter("code");
         String description = request.getParameter("description");
 
-        String url = "/addProductPage.jsp";
+        String message = "";
         String codeMessage = "";
         String descriptionMessage = "";
         String priceMessage = "";
 
         if (code.length() == 0) {
-            codeMessage = "Please enter product's code.";
+            codeMessage = "*";
         } else if (ProductIO.isCodeExist(code)) {
-            codeMessage = "Code has existed. Please enter another.";
+            codeMessage = "* Code has existed. Please enter another.";
         } else {
             request.setAttribute("code", code);
         }
 
         if (description.length() == 0) {
-            descriptionMessage = "Please enter product's description";
+            descriptionMessage = "*";
         } else {
             request.setAttribute("description", description);
         }
@@ -35,7 +35,7 @@ public class addProduct extends HttpServlet {
         try {
             price = Float.valueOf(request.getParameter("price"));
         } catch (NumberFormatException e) {
-            priceMessage = "Product's price must be a number. Please enter again";
+            priceMessage = "* Product's price must be a number. Please enter again";
         }
 
         if (priceMessage.equals("")) {
@@ -45,6 +45,8 @@ public class addProduct extends HttpServlet {
         request.setAttribute("codeMessage", codeMessage);
         request.setAttribute("descriptionMessage", descriptionMessage);
         request.setAttribute("priceMessage", priceMessage);
+
+        String url = "/addProductPage.jsp";
 
         if (codeMessage.equals("") && descriptionMessage.equals("") && priceMessage.equals("")) {
             Product product = new Product(code, description, price);

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--Le Quoc Huy - B16DCCN176 - Nhom 8-->
 <!--Nguyen Manh Duc - B16DCCN080 - Nhom 8-->
 <%@include file="/includes/header.html" %>
@@ -13,23 +14,16 @@
         <td></td>
         <td></td>
         </thead>
-        <%@ page import="static data.ProductIO.productList"
-                 %>
-        <%@ page import="business.Product" %>
 
-        <%
-            for (Product p : productList) {
-        %>
-        <tr>
-            <td><%=p.getCode()%></td>
-            <td><%=p.getDescription()%></td>
-            <td><%=p.getPrice()%>$</td>
-            <td><a href="editProductPage.jsp?code=<%=p.getCode()%>&description=<%=p.getDescription()%>&price=<%=p.getPrice()%>">Edit</a></td>
-            <td><a href="deleteProductPage.jsp?code=<%=p.getCode()%>&description=<%=p.getDescription()%>&price=<%=p.getPrice()%>">Delete</a></td>
-        </tr>
-        <%
-            }
-        %>
+        <c:forEach items="${sessionScope.productList}" var="product">
+            <tr>
+                <td>${product.code}</td>
+                <td>${product.description}</td>
+                <td>${product.price}</td>
+                <td><a href="editProductPage.jsp?code=${product.code}&description=${product.description}&price=${product.price}">Edit</a></td>
+                <td><a href="deleteProductPage.jsp?code=${product.code}&description=${product.description}&price=${product.price}">Delete</a></td>
+            </tr>
+        </c:forEach>
     </table>
     <br>
     <br>

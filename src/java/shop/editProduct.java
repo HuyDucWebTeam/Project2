@@ -21,38 +21,31 @@ public class editProduct extends HttpServlet {
         
         if (code.length() == 0) {
             codeMessage = "Please enter product's code.";
-            code = " ";
         } else if (ProductIO.isCodeExist(code) && code.equals(oldCode) == false) {
             codeMessage = "Code has existed. Please enter another.";
-            code = " ";
-        } else {
-            request.setAttribute("code", code);
+            code = "";
         }
 
         if (description.length() == 0) {
             descriptionMessage = "Please enter product's description";
-            description = " ";
-        } else {
-            request.setAttribute("description", description);
         }
 
         float price = 0;
+        String priceURL = "";
         try {
             price = Float.valueOf(request.getParameter("price"));
+            priceURL = String.valueOf(price);
         } catch (NumberFormatException e) {
             priceMessage = "Product's price must be a number. Please enter again";
-            price = -1;
+            priceURL = "";
         }
 
-        if (priceMessage.equals("")) {
-            request.setAttribute("price", String.valueOf(price));
-        }
 
         request.setAttribute("codeMessage", codeMessage);
         request.setAttribute("descriptionMessage", descriptionMessage);
         request.setAttribute("priceMessage", priceMessage);
 
-        String url = "/editProductPage.jsp?code=" + code + "&description=" + URLEncoder.encode(description) + "&price=" + price;
+        String url = "/editProductPage.jsp?code=" + code + "&description=" + URLEncoder.encode(description) + "&price=" + priceURL;
 
         if (codeMessage.equals("") && descriptionMessage.equals("") && priceMessage.equals("")) {
             Product product = new Product(code, description, price);
@@ -61,6 +54,7 @@ public class editProduct extends HttpServlet {
             ProductIO.editProduct(oldCode, product, file);
             url = "/viewProductPage.jsp";
         }
+        
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
