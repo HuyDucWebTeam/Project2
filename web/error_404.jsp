@@ -1,4 +1,5 @@
-<%@include file="/includes/header.html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="/includes/header.html" />
 
 <%@ page isErrorPage="true"%>
 
@@ -15,4 +16,4 @@
 <p>The server was not able to find the file you requested.</p>
 <p>To continue, click on the Back button.</p>
 
-<%@include file="/includes/footer.jsp" %>
+<c:import url="/includes/footer.jsp" />

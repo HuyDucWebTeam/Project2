@@ -19,6 +19,7 @@ public class addProduct extends HttpServlet {
 
         if (code.length() == 0) {
             codeMessage = "*";
+            message = "You must enter all required fields.";
         } else if (ProductIO.isCodeExist(code)) {
             codeMessage = "* Code has existed. Please enter another.";
         } else {
@@ -27,6 +28,7 @@ public class addProduct extends HttpServlet {
 
         if (description.length() == 0) {
             descriptionMessage = "*";
+            message = "You must enter all required fields.";
         } else {
             request.setAttribute("description", description);
         }
@@ -36,12 +38,14 @@ public class addProduct extends HttpServlet {
             price = Float.valueOf(request.getParameter("price"));
         } catch (NumberFormatException e) {
             priceMessage = "* Product's price must be a number. Please enter again";
+            message = "You must enter all required fields.";
         }
 
         if (priceMessage.equals("")) {
             request.setAttribute("price", String.valueOf(price));
         }
 
+        request.setAttribute("message", message);
         request.setAttribute("codeMessage", codeMessage);
         request.setAttribute("descriptionMessage", descriptionMessage);
         request.setAttribute("priceMessage", priceMessage);

@@ -1,5 +1,5 @@
-<%@include file="/includes/header.html" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="/includes/header.html" />
 <h1>Product</h1>
 
 <form id="form_add" method="POST">
@@ -26,11 +26,11 @@
 
 <script>
     function update() {
-        document.getElementById('form_add').action = 'editProduct';
+        document.getElementById('form_add').action = "<c:url value="/editProduct"/>";
     }
     function view() {
-        document.getElementById('form_add').action = 'viewProduct';
+        document.getElementById('form_add').action = "<c:url value="/viewProduct"/>";
     }
 </script>
 
-<%@include file="/includes/footer.jsp" %>
+<c:import url="/includes/footer.jsp" />
