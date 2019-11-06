@@ -3,8 +3,7 @@
 <c:import url="/includes/header.html"/>
 
 <h1>Product</h1>
-<c:out value="${message}" default=""/>
-<p><er:ifEmptyMark color="blue" field=""/> marks required fields</p>
+<p><er:ifEmptyMark color="red" field=""/> marks required fields</p>
 
 <form id="form_add" method="POST">
     <table cellspacing="0" border="0">
@@ -12,7 +11,8 @@
             <td align="right">Product Code:</td>
             <td>
                 <input type="text" name="code" value="${code}">
-                <er:ifEmptyMark color="blue" field="${code}"/>
+                <er:ifEmptyMark color="red" field="${code}"/>
+                <span style="color: red">${requestScope.codeMessage}</span>
             </td>
 
         </tr>
@@ -20,7 +20,7 @@
             <td align="right">Product Description:</td>
             <td>
                 <input type="text" name="description" value="${description}">
-                <er:ifEmptyMark color="blue" field="${description}"/>
+                <er:ifEmptyMark color="red" field="${description}"/>
             </td>
 
         </tr>
@@ -28,7 +28,8 @@
             <td align="right">Product Price:</td>
             <td>
                 <input type="text" name="price" value="${price}">
-                <er:ifEmptyMark color="blue" field="${price}"/>
+                <er:ifEmptyMark color="red" field="${price}"/>
+                <span style="color: red">${requestScope.priceMessage}</span>
             </td>
         </tr>
     </table>

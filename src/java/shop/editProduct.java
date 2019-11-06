@@ -16,45 +16,38 @@ public class editProduct extends HttpServlet {
         String description = request.getParameter("description");
 
         String codeMessage = "";
-        String descriptionMessage = "";
         String priceMessage = "";
-        
-        if (code.length() == 0) {
-            codeMessage = "Please enter product's code.";
-        } else if (ProductIO.isCodeExist(code) && code.equals(oldCode) == false) {
-            codeMessage = "Code has existed. Please enter another.";
-            code = "";
-        }
 
-        if (description.length() == 0) {
-            descriptionMessage = "Please enter product's description";
+        if (ProductIO.isCodeExist(code) && code.equals(oldCode) == false) {
+            codeMessage = "* Code has existed. Please enter another.";
+            code = "";
         }
 
         float price = 0;
         String priceURL = "";
-        try {
-            price = Float.valueOf(request.getParameter("price"));
-            priceURL = String.valueOf(price);
-        } catch (NumberFormatException e) {
-            priceMessage = "Product's price must be a number. Please enter again";
-            priceURL = "";
+        if (request.getParameter("price").length() != 0) {
+            try {
+                price = Float.valueOf(request.getParameter("price"));
+                priceURL = String.valueOf(price);
+            } catch (NumberFormatException e) {
+                priceMessage = "Product's price must be a number. Please enter again";
+                priceURL = "";
+            }
         }
 
-
         request.setAttribute("codeMessage", codeMessage);
-        request.setAttribute("descriptionMessage", descriptionMessage);
         request.setAttribute("priceMessage", priceMessage);
 
-        String url = "/editProductPage.jsp?code=" + code + "&description=" + URLEncoder.encode(description) + "&price=" + priceURL;
+        String url = "/editProductPage.jsp?code=" + oldCode + "&description=" + URLEncoder.encode(description) + "&price=" + priceURL;
 
-        if (codeMessage.equals("") && descriptionMessage.equals("") && priceMessage.equals("")) {
+        if (code.length() != 0 && codeMessage.equals("") && description.length() != 0 && priceURL.length() != 0 && priceMessage.equals("")) {
             Product product = new Product(code, description, price);
             ServletContext sc = getServletContext();
             String file = sc.getRealPath(sc.getInitParameter("relativePathToFile"));
             ProductIO.editProduct(oldCode, product, file);
             url = "/viewProductPage.jsp";
         }
-        
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
